@@ -10,14 +10,15 @@ public class GameController : MonoBehaviour
 		public float timePace;
 		float respawnTimer;
 		public Text scoreText;
-		int score;
+		public Text highscoreText;
+		int score, highscore;
 		public GameObject pipe;
 		public Transform startPosition;
 		public static bool isRunning;
 		public static bool isFinished;
 		public int pipeMaxY = 2;
-	public int pipeMinY = -1;
-		public GameObject restartButton;
+		public int pipeMinY = -1;
+		public GameObject restartMenu;
 		public GameObject tutorButton;
 		Vector2 gravity;
 
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour
 		void Start ()
 		{
 				score = 0;
+				highscore = PlayerPrefs.GetInt ("High Score");
+
 				isRunning = false;
 				isFinished = false;
 
@@ -45,7 +48,7 @@ public class GameController : MonoBehaviour
 						if (respawnTimer > timeDelay) {
 								respawnTimer = 0f;
 
-				int random = Random.Range (pipeMinY, pipeMaxY);
+								int random = Random.Range (pipeMinY, pipeMaxY);
 
 								var newPosition = startPosition.position;
 								newPosition.y += random;
@@ -66,7 +69,8 @@ public class GameController : MonoBehaviour
 		{
 				isRunning = false;
 				//Application.LoadLevel (Application.loadedLevel);
-				restartButton.SetActive (true);
+				highscoreText.text = highscore + "";
+				restartMenu.SetActive (true);
 				isFinished = true;
 		}
 
@@ -86,6 +90,18 @@ public class GameController : MonoBehaviour
 		void updateScore ()
 		{
 				score++;
+		
+				PlayerPrefs.SetInt ("Last Score", score);
+		
+				if (score > highscore) { //when player dies set highscore = to that score
+						highscore = score;
+						PlayerPrefs.SetInt ("High Score", highscore);
+			
+						Debug.Log ("High Score is " + highscore);
+			
+				} 
+
 				scoreText.text = score + "";
+				
 		}
 }
