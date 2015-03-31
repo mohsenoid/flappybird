@@ -9,16 +9,16 @@ public class GroundController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				rigidbody2D.velocity = Vector2.right * groundSpeed * -1;
+				GetComponent<Rigidbody2D>().velocity = Vector2.right * groundSpeed * -1;
 		}
 	
 		// Update is called once per frame
 		void Update ()
 		{
 			if (GameController.isFinished)
-						rigidbody2D.velocity = Vector2.zero;
+						GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		else
-			rigidbody2D.velocity = Vector2.right * groundSpeed * -1;
+			GetComponent<Rigidbody2D>().velocity = Vector2.right * groundSpeed * -1;
 		}
 
 		void OnTriggerEnter2D (Collider2D other)

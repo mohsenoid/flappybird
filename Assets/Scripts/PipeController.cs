@@ -9,7 +9,7 @@ public class PipeController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				rigidbody2D.velocity = Vector2.right * moveSpeed * -1;
+				GetComponent<Rigidbody2D>().velocity = Vector2.right * moveSpeed * -1;
 //				gameController = GameObject.FindGameObjectWithTag ("GameController");
 		}
 	
@@ -17,7 +17,7 @@ public class PipeController : MonoBehaviour
 		void Update ()
 		{
 				if (!GameController.isRunning)
-						rigidbody2D.isKinematic = true;
+						GetComponent<Rigidbody2D>().isKinematic = true;
 		}
 
 		void OnTriggerEnter2D (Collider2D other)
